@@ -3,6 +3,7 @@ cmake_minimum_required(VERSION 3.12)
 project(helloworld_ci_cd_test VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(Threads REQUIRED)
+find_package(Boost REQUIRED)
 
 configure_file(version.h.vers ${PROJECT_SOURCE_DIR}/version.h)
 
