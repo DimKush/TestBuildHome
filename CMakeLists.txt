@@ -1,9 +1,5 @@
 cmake_minimum_required(VERSION 3.14)
 
-execute_process(
-        COMMAND ${CMAKE_COMMAND} -E environment
-)
-
 project(helloworld_ci_cd_test VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(Threads REQUIRED)
