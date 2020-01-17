@@ -4,6 +4,6 @@
 int main()
 {
     std::cout << "build = " << PROJECT_VERSION_PATCH << std::endl;
-    std::cout << "Hello world!";
+    std::cout << "Hello world and travis!";
     return 0;
 }
