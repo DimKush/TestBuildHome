@@ -1,3 +1,10 @@
+#for version.h
+version.h
+
+#for directories
+/cmake-build-debug
+/.idea
+
 # Prerequisites
 *.d
 
