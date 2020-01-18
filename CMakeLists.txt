@@ -1,12 +1,9 @@
-cmake_minimum_required(VERSION 3.14)
-
-execute_process(
-        COMMAND ${CMAKE_COMMAND} -E environment
-)
+cmake_minimum_required(VERSION 3.12)
 
 project(helloworld_ci_cd_test VERSION 0.0.$ENV{TRAVIS_BUILD_NUMBER})
 
 find_package(Threads REQUIRED)
+find_package(Boost REQUIRED)
 
 configure_file(version.h.vers ${PROJECT_SOURCE_DIR}/version.h)
 
@@ -21,37 +18,35 @@ set_target_properties(
         CXX_STANDARD 17
         CXX_STANDARD_REQUIRED ON
         COMPILE_OPTIONS "-Wpedantic;-Wall;-Wextra"
-        )
+)
 
 set_target_properties(unit_test_ci_cd PROPERTIES
-        COMPILE_DEFINiTIONS BOOST_TEST_DYN_LINK
+        COMPILE_DEFINITIONS BOOST_TEST_DYN_LINK
         INCLUDE_DIRECTORIES ${Boost_INCLUDE_DIR}
-)
+        )
 
-target_link_libraries(
-        helloworld_ci_cd_test
+target_link_libraries(helloworld_ci_cd_test
         helloworld_ci_cd_test_lib
         Threads::Threads
-)
+        )
 
-target_link_libraries(
-        unit_test_ci_cd
+target_link_libraries(unit_test_ci_cd
         ${Boost_LIBRARIES}
         helloworld_ci_cd_test_lib
 
-)
+        )
 
 install(TARGETS helloworld_ci_cd_test RUNTIME DESTINATION bin)
 
 set(CPACK_GENERATOR DEB)
 
 set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MAJOR}")
-set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_MINOR}")
-set(CPACK_PACKAGE_VERSION_MAJOR "${PROJECT_VERSION_PATCH}")
+set(CPACK_PACKAGE_VERSION_MINOR "${PROJECT_VERSION_MINOR}")
+set(CPACK_PACKAGE_VERSION_PATCH "${PROJECT_VERSION_PATCH}")
 
 set(CPACK_PACKAGE_CONTACT dimkysh@gmail.com)
 
-set(CPACK_DEBIAN_PACKAGE_SHILIBDEPS ON)
+set(CPACK_DEBIAN_PACKAGE_SHLIBDEPS ON)
 
 include(CPack)
 
